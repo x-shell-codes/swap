@@ -15,8 +15,6 @@
 # Constants                                                                                                            #
 ########################################################################################################################
 NORMAL_LINE=$(tput sgr0)
-BLACK_LINE=$(tput setaf 0)
-WHITE_LINE=$(tput setaf 7)
 RED_LINE=$(tput setaf 1)
 YELLOW_LINE=$(tput setaf 3)
 GREEN_LINE=$(tput setaf 2)
@@ -25,6 +23,25 @@ POWDER_BLUE_LINE=$(tput setaf 153)
 BRIGHT_LINE=$(tput bold)
 REVERSE_LINE=$(tput smso)
 UNDER_LINE=$(tput smul)
+
+########################################################################################################################
+# Line Helper Functions                                                                                                #
+########################################################################################################################
+function ErrorLine() {
+    echo "${RED_LINE}$1${NORMAL_LINE}"
+}
+
+function WarningLine() {
+    echo "${YELLOW_LINE}$1${NORMAL_LINE}"
+}
+
+function SuccessLine() {
+    echo "${GREEN_LINE}$1${NORMAL_LINE}"
+}
+
+function InfoLine() {
+    echo "${BLUE_LINE}$1${NORMAL_LINE}"
+}
 
 ########################################################################################################################
 # Version                                                                                                              #
@@ -52,25 +69,6 @@ function Help() {
   echo "-V | --version     Print software version and exit."
   echo
   echo "For more details see https://github.com/x-shell-codes/swap."
-}
-
-########################################################################################################################
-# Line Helper Functions                                                                                                #
-########################################################################################################################
-function ErrorLine() {
-    echo "${RED_LINE}$1${NORMAL_LINE}"
-}
-
-function WarningLine() {
-    echo "${YELLOW_LINE}$1${NORMAL_LINE}"
-}
-
-function SuccessLine() {
-    echo "${GREEN_LINE}$1${NORMAL_LINE}"
-}
-
-function InfoLine() {
-    echo "${BLUE_LINE}$1${NORMAL_LINE}"
 }
 
 ########################################################################################################################
@@ -141,6 +139,8 @@ function CheckRootUser() {
 echo "${POWDER_BLUE_LINE}${BRIGHT_LINE}${REVERSE_LINE}   SETTING SWAP   ${NORMAL_LINE}"
 
 CheckRootUser
+
+export DEBIAN_FRONTEND=noninteractive
 
 #
 echo "${BLUE_LINE}${BRIGHT_LINE}INFO${BLUE_LINE}: vm.swappiness setting${BLUE_LINE}${NORMAL_LINE}"
